@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Elcsatolt terület kalkulátor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Főoldal</a>
+            <a href="teruletek.html">Elcsatolt területek</a>
+            <a href="kalkulator.html">Terület kalkulátor</a>
+            <a href="kapcsolat.html">Kapcsolat</a>
+        </nav>
+    </header>
+
+    <div class="section">
+        <h1>Elcsatolt terület kalkulátor</h1>
+        <p>Válassz egy elcsatolt területet, vagy írd be a veszteség nagyságát (km²), és lásd a fájdalom skálán a hatását.</p>
+
+        <div class="kalkulator-form">
+            <label>Válassz területet:</label>
+            <select id="teruletValaszto">
+                <option value="">Válassz...</option>
+                <option value="103000">Erdély (103.000 km²)</option>
+                <option value="62000">Felvidék (62.000 km²)</option>
+                <option value="21000">Délvidék (21.000 km²)</option>
+                <option value="egyeb">Egyéb (kézzel megadott)</option>
+            </select>
+
+            <div id="egyebInput" class="rejtett">
+                <label>Veszteség mérete (km²):</label>
+                <input type="number" id="egyebMeret" min="1" placeholder="pl. 50000">
+            </div>
+
+            <button onclick="szamol()">Számítás</button>
+        </div>
+
+        <div id="eredmenyTarolo" class="rejtett">
+            <h3 id="eredmeny"></h3>
+            <div class="fajdalomMero">
+                <div id="fajdalomSlider"></div>
+                <p id="fajdalomSzoveg"></p>
+            </div>
+        </div>
+
+        <div class="torteneti-linkek">
+            <h3>Hasznos információk:</h3>
+            <ul>
+                <li><a href="https://hu.wikipedia.org/wiki/Magyarorsz%C3%A1g_f%C3%B6ldrajza" target="_blank">Magyarország földrajza</a></li>
+                <li><a href="https://hu.wikipedia.org/wiki/Ter%C3%BClet" target="_blank">Terület fogalma</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Trianon történelmi weboldal</h4>
+                <p>© 2025 - Minden jog fenntartva</p>
+            </div>
+            <div class="footer-section">
+                <h4>Kapcsolat</h4>
+                <p>Email: info@trianonweb.hu</p>
+                <p>Telefon: +36 1 234 5678</p>
+            </div>
+            <div class="footer-section">
+                <h4>Történelmi források</h4>
+                <a href="https://hu.wikipedia.org/wiki/Trianoni_b%C3%A9keszerz%C5%91d%C3%A9s" target="_blank">Wikipedia Trianon</a><br>
+                <a href="https://mek.oszk.hu" target="_blank">Magyar Elektronikus Könyvtár</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const teruletValaszto = document.getElementById('teruletValaszto');
+        const egyebInput = document.getElementById('egyebInput');
+        const eredmenyTarolo = document.getElementById('eredmenyTarolo');
+
+        teruletValaszto.addEventListener('change', function() {
+            if (this.value === 'egyeb') {
+                egyebInput.classList.remove('rejtett');
+            } else {
+                egyebInput.classList.add('rejtett');
+            }
+        });
+
+        function szamol() {
+            let veszteseg = 0;
+            const valasztott = teruletValaszto.value;
+
+            if (valasztott === 'egyeb') {
+                veszteseg = parseInt(document.getElementById('egyebMeret').value);
+            } else if (valasztott) {
+                veszteseg = parseInt(valasztott);
+            }
+
+            if (isNaN(veszteseg) || veszteseg <= 0) {
+                document.getElementById('eredmeny').textContent = 'Kérlek adj meg érvényes adatot!';
+                return;
+            }
+
+            document.getElementById('eredmeny').innerHTML = 'Területvesztés: <strong>' + veszteseg.toLocaleString() + ' km²</strong>';
+            eredmenyTarolo.classList.remove('rejtett');
+
+            // Fájdalom mérő
+            let fajdalom = 0;
+            if (veszteseg < 20000) fajdalom = 1;
+            else if (veszteseg < 50000) fajdalom = 2;
+            else if (veszteseg < 100000) fajdalom = 3;
+            else if (veszteseg < 150000) fajdalom = 4;
+            else fajdalom = 5;
+
+            const slider = document.getElementById('fajdalomSlider');
+            slider.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const pont = document.createElement('div');
+                pont.className = 'fajdalomPont' + (i <= fajdalom ? ' aktív' : '');
+                slider.appendChild(pont);
+            }
+
+            const szovegek = [
+                'Enyhe veszteség',
+                'Mérsékelt veszteség',
+                'Komoly veszteség',
+                'Nagyon súlyos veszteség',
+                'Katasztrofális veszteség'
+            ];
+            document.getElementById('fajdalomSzoveg').textContent = szovegek[fajdalom - 1];
+        }
+    </script>
+</body>
+</html>

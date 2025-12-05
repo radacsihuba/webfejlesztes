@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Kapcsolat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Főoldal</a>
+            <a href="teruletek.html">Elcsatolt területek</a>
+            <a href="kalkulator.html">Terület kalkulátor</a>
+            <a href="kapcsolat.html">Kapcsolat</a>
+        </nav>
+    </header>
+
+    <div class="section">
+        <h1>Kapcsolat</h1>
+        <p>Kérdésed van a trianoni békeszerződéssel kapcsolatban? Írj nekünk!</p>
+
+        <form id="kapcsolatForm" class="kapcsolatForm">
+            <div class="formSor">
+                <label for="nev">Név:</label>
+                <input type="text" id="nev">
+            </div>
+
+            <div class="formSor">
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="formSor">
+                <label for="tel">Telefonszám:</label>
+                <input type="text" id="tel">
+            </div>
+
+            <div class="formSor">
+                <label for="eletkor">Életkor:</label>
+                <input type="number" id="eletkor">
+            </div>
+
+            <div class="formSor">
+                <label for="nem">Nem:</label>
+                <select id="nem">
+                    <option value="">Válassz...</option>
+                    <option value="ferfi">Férfi</option>
+                    <option value="no">Nő</option>
+                </select>
+            </div>
+
+            <div class="formSor">
+                <label for="tema">Üzenet témája:</label>
+                <input type="text" id="tema">
+            </div>
+
+            <div class="formSor">
+                <label for="uzenet">Üzenet:</label>
+                <textarea id="uzenet"></textarea>
+            </div>
+
+            <button type="submit">Üzenet küldése</button>
+        </form>
+
+        <div id="uzenetValasz"></div>
+
+        <div class="elerhetosegek">
+            <h3>Egyéb elérhetőségek:</h3>
+            <p><strong>Cím:</strong> 1054 Budapest, Szabadság tér 1.</p>
+            <p><strong>Telefon:</strong> +36 1 234 5678</p>
+            <p><strong>Email:</strong> info@trianonweb.hu</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Trianon történelmi weboldal</h4>
+                <p>© 2025 - Minden jog fenntartva</p>
+            </div>
+            <div class="footer-section">
+                <h4>Kapcsolat</h4>
+                <p>Email: info@trianonweb.hu</p>
+                <p>Telefon: +36 1 234 5678</p>
+            </div>
+            <div class="footer-section">
+                <h4>Történelmi források</h4>
+                <a href="https://hu.wikipedia.org/wiki/Trianoni_b%C3%A9keszerz%C5%91d%C3%A9s" target="_blank">Wikipedia Trianon</a><br>
+                <a href="https://mek.oszk.hu" target="_blank">Magyar Elektronikus Könyvtár</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
